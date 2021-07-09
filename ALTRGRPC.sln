@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31410.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ALTRGRPC", "ALTRGRPC\ALTRGRPC.csproj", "{46DEF32F-CB97-48AD-9A7A-9285DB07F602}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ALTRgRPCClient", "..\ALTRgRPCClient\ALTRgRPCClient\ALTRgRPCClient.csproj", "{4DCB15CD-1119-479B-BE16-854B16778565}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{46DEF32F-CB97-48AD-9A7A-9285DB07F602}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46DEF32F-CB97-48AD-9A7A-9285DB07F602}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46DEF32F-CB97-48AD-9A7A-9285DB07F602}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46DEF32F-CB97-48AD-9A7A-9285DB07F602}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DCB15CD-1119-479B-BE16-854B16778565}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DCB15CD-1119-479B-BE16-854B16778565}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DCB15CD-1119-479B-BE16-854B16778565}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DCB15CD-1119-479B-BE16-854B16778565}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1900403E-6D91-472C-847C-F3BD1F79C98C}
+	EndGlobalSection
+EndGlobal
