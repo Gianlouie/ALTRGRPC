@@ -21,12 +21,17 @@ namespace ALTRgRPCClient
                     var client = new PackageService.PackageServiceClient(channel);
                     Package reply;
 
-                    do
+                    while (true)
                     {
-                        Console.WriteLine("Press 1 to get a new package or press 2 to exit");
-                        if (Console.ReadLine() == "1")
+                        Console.WriteLine("Press 1 to get a new package or press anything else to exit");
+                        var input = Console.ReadLine();
+                        if (input == "1")
                         {
-                            reply = await client.GetPackageAsync(new Empty { });
+                            Func<Task<Package>> action = async () => await client.GetPackageAsync(new Empty { });
+                            Func<Package, bool> validate = x => x != null;
+
+                            reply = await Retry.DoAsync(action, validate);
+
                             if (reply != null)
                             {
                                 Console.WriteLine(reply);
@@ -36,14 +41,22 @@ namespace ALTRgRPCClient
                                 Console.WriteLine("Unable to get package");
                             }
                         }
+                        else
+                        {
+                            break;
+                        }
                     }
-                    while (Console.ReadLine() != "2");
 
                     shouldStop = true;
                 }
                 catch (RpcException re)
                 {
                     Console.WriteLine("Unable to get package " + re.ToString());
+                    shouldStop = false;
+                }
+                catch (AggregateException ae)
+                {
+                    Console.WriteLine(ae + "\nRetried to get package 10 times and still unable to retrieve it. \n ");
                     shouldStop = false;
                 }
             }
