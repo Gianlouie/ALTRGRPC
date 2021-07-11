@@ -1,13 +1,23 @@
 ﻿using System;
-using Grpc.Core;
+using System.Threading.Tasks;
+using Altr;
+using Grpc.Net.Client;
 
-namespace gRPCClient
+namespace ALTRgRPCClient
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            Channel channel = new Channel("127.0.0.1:30051")
+            // The port number(5001) must match the port of the gRPC server.
+            using var channel = GrpcChannel.ForAddress("https://localhost:5001");
+
+            var client = new PackageService.PackageServiceClient(channel);
+            var reply = await client.GetPackageAsync(new Empty { });
+
+            Console.WriteLine(reply);
+            Console.WriteLine("Press any key to exit...");
+            Console.ReadKey();
         }
     }
 }
