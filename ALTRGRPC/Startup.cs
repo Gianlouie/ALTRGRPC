@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using ALTRGRPC.Models;
+using ALTRGRPC.Interfaces;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using ALTRGRPC.Repositories;
 
 namespace ALTRGRPC
 {
@@ -17,6 +18,11 @@ namespace ALTRGRPC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddGrpc();
+
+            services.AddDbContext<RepositoryContext>(options => options.UseInMemoryDatabase(Guid.NewGuid().ToString()));
+
+            services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+            services.AddTransient<IRequestRepository, RequestRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,6 +44,8 @@ namespace ALTRGRPC
                     await context.Response.WriteAsync("Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
                 });
             });
+
+            
         }
     }
 }
