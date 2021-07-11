@@ -88,11 +88,11 @@ namespace ALTRGRPC
         private async Task<List<Request>> GetAllServicedRequestsWithinLastHalfHourByIpAddressAsync(string ipAddress)
         {
             var now = DateTime.Now;
-            var halfHour = now.AddMinutes(30);
+            var halfMinute = now.AddSeconds(30);
 
             var results = await _requestRepository.GetAllRequestsAsync();
 
-            return results.Where(r => r.Serviced && r.RequestTime < halfHour && r.IpAddress == ipAddress).ToList();
+            return results.Where(r => r.Serviced && r.RequestTime < halfMinute && r.IpAddress == ipAddress).ToList();
         }
 
         private async Task<Request> AddRequestAsync(Request request)
