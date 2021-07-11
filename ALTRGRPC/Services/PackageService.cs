@@ -69,7 +69,7 @@ namespace ALTRGRPC
         /// </summary>
         private bool CheckIpAddressAttempts(Request serviceRequest)
         {
-            var results = GetAllServicedRequestsWithinLastHalfHourByIpAddressAsync(serviceRequest.IpAddress).Result;
+            var results = GetAllServicedRequestsWithinLast30SecondsByIpAddressAsync(serviceRequest.IpAddress).Result;
 
             if (results.Count < 3)
                 return true;
@@ -85,7 +85,7 @@ namespace ALTRGRPC
             return IpAddress;
         }
 
-        private async Task<List<Request>> GetAllServicedRequestsWithinLastHalfHourByIpAddressAsync(string ipAddress)
+        private async Task<List<Request>> GetAllServicedRequestsWithinLast30SecondsByIpAddressAsync(string ipAddress)
         {
             var now = DateTime.Now;
             var halfMinute = now.AddSeconds(30);
